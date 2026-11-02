@@ -1,0 +1,44 @@
+local MarketplaceService = game:GetService("MarketplaceService")
+local StarterGui = game:GetService("StarterGui")
+
+local success, gameInfo = pcall(function()
+	return MarketplaceService:GetProductInfo(game.PlaceId)
+end)
+
+local gameName = success and gameInfo.Name or "Unknown Game"
+
+local function notify(text)
+	pcall(function()
+		StarterGui:SetCore("SendNotification", {
+			Title = "BEAMER.cc Loader",
+			Text = text,
+			Duration = 5
+		})
+	end)
+end
+
+local function safeExecute(url)
+	local execSuccess, result = pcall(function()
+		local code = game:HttpGet(url)
+		local fn, err = loadstring(code)
+		if not fn then
+			error("Loadstring Error: " .. tostring(err))
+		end
+		return fn()
+	end)
+	
+	if not execSuccess then
+		notify("Execution Failed - Check F9 Console")
+		warn("BEAMER.cc Loader Error: " .. tostring(result))
+	end
+end
+
+if game.PlaceId == 185655149 or string.find(string.lower(gameName), "bloxburg") then
+	notify("Game Found " .. gameName .. " is Supported.")
+	safeExecute("https://pastefy.app/Re7smzt0/raw")
+elseif game.PlaceId == 12625784503 or string.find(string.lower(gameName), "saber showdown") then
+	notify("Game Found " .. gameName .. " is Supported.")
+	safeExecute("https://pastefy.app/SjFmmQCb/raw")
+else
+	notify("Game Not Found " .. gameName .. " is Not Supported.")
+end
