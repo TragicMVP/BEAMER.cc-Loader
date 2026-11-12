@@ -35,7 +35,7 @@ end
 
 if game.PlaceId == 185655149 or string.find(string.lower(gameName), "bloxburg") then
 	notify("Game Found " .. gameName .. " is Supported.")
-	safeExecute("https://pastefy.app/Re7smzt0/raw")
+	safeExecute("https://pastefy.app/kSdHy51Q/raw")
 elseif game.PlaceId == 12625784503 or string.find(string.lower(gameName), "saber showdown") then
 	notify("Game Found " .. gameName .. " is Supported.")
 	safeExecute("https://pastefy.app/EEZfp9bZ/raw")
